@@ -3,22 +3,30 @@ version: "3"
 services:
   drupal:
     image: bitnami/drupal:latest
-
+    
 
   mariadb:
     image: bitnami/mariadb:latest
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
       - MYSQL_USER=YAM428
-      - MYSQL_PASSWORD=<Your Student Number>
+      - MYSQL_PASSWORD=030718110
       - MYSQL_DATABASE=final
-    
+   
 
   nginx:
     image: nginx
-    
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - VIRTUAL_HOST=mohammedfatayer.me
+      - LETSENCRYPT_HOST=mohammedfatayer.me
+      - LETSENCRYPT_EMAIL=fatayer.mohammed@std.izu.edu.tr
+ 
 
   certbot:
     image: certbot
+    volumes:
+      - "/etc/letsencrypt:/etc/letsencrypt"
     
-
